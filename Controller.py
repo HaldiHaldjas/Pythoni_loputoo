@@ -14,6 +14,11 @@ class Controller:
     def search_button_click(self):
         self.view.btn_choose_file['state'] = 'normal'
 
+    def check(self, search_input):
+        try:
+            input = Model(self, self.__data, self.__lbl_entry)
+            self.view.generate_search_results({})
+
 
 
 

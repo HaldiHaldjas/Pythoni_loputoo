@@ -74,7 +74,34 @@ class View(Tk):
     def generate_search_results(self, frame, data):
         my_table = Treeview(frame)
 
+    def select_file(self):
+        filetypes = (
+            ('text files', '*.txt'),
+            ('All files', '*.*')
+        )
+        filename = filedialog.askopenfilename(
+            title='Ava fail',
+            initialdir='/',
+            filetypes=filetypes)
+        if filename:
+            self.process_file(filename)
 
+    def process_file(self, filename):
+        try:
+            with open(filename, 'r') as file:
+                data = file.read()
+                return data
+
+        except FileNotFoundError:
+            messagebox.showerror('Viga, faili ei õnnestunud leida!')
+
+    def search_data(self, data):
+        if data is None:
+            messagebox.showerror('Viga, faili ei saanud avada!')
+            search = self.lbl_entry
+            if not search:
+                messagebox.showerror('Viga, otsitut ei leitud!')
+                return
 
 
 
