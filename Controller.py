@@ -11,13 +11,22 @@ class Controller:
     def send_search_button_click(self):
         self.view.btn_search['state'] = 'normal'
 
-    def search_button_click(self):
-        self.view.btn_choose_file['state'] = 'normal'
+    def search_button_click(self, phrase):
+        self.model.set_phrase(phrase)
+        self.model.compare_data()
+        self.view.show_results(self.model.get_result())
+        # self.view.btn_choose_file['state'] = 'normal'
 
-    def check(self, search_input):
-        try:
-            input = Model(self, self.__data, self.__lbl_entry)
-            self.view.generate_search_results({})
+    def set_file_name(self, filename):
+        self.model.set_filename(filename)
+
+
+    # def check(self):
+    #     try:
+    #         search_data = self.view.lbl_entry.get()
+    #         self.view.generate_search_results()
+    #     except ValueError as error:
+    #         self.view.show_error(error)
 
 
 
