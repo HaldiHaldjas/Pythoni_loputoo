@@ -1,6 +1,7 @@
 
 class Model:
     def __init__(self):
+        self.__header = []
         self.__filename = None
         self.__phrase = ""
         self.__data = []
@@ -16,19 +17,34 @@ class Model:
     def get_result(self):
         return self.__result
 
+    def get_header(self):
+        return self.__header
+
+    # def read_data(self):
+        # with open(self.__filename, 'r', encoding='utf-8') as file:
+        #     self.__header = file.readlines()[0]
+        #     file_context = file.readlines()[1:]
+        #     for line in file_context:
+        #         self.__data.append(line.strip())
+
     def read_data(self):
         with open(self.__filename, 'r', encoding='utf-8') as file:
-            file_context = file.readlines()[1:]
+            file_content = file.readlines()
+            self.__header = file_content[0].strip().split(';')  # Store header without newline, split by ;
+            file_context = file_content[1:]  # Exclude the header
             for line in file_context:
                 self.__data.append(line.strip())
-            # print(self.__data)
+            print(self.__header)
+            return self.__header, self.__data
 
     def compare_data(self):
         if len(self.__phrase) > 2:
             for item in self.__data:
                 if self.__phrase in item:
-                # print(item)
-                    self.__result.append(item)
+                    print(item)
+                    components = item.split(';')
+                    self.__result.append(components)
+        return self.__result
 
 
     # def compare_data(self, data):

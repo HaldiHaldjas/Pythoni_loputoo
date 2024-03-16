@@ -1,5 +1,3 @@
-from tkinter import filedialog, messagebox
-
 from Model import Model
 from View import View
 
@@ -14,19 +12,27 @@ class Controller:
     def search_button_click(self, phrase):
         self.model.set_phrase(phrase)
         self.model.compare_data()
-        self.view.show_results(self.model.get_result())
-        # self.view.btn_choose_file['state'] = 'normal'
+        result = self.model.get_result()
+        header = self.model.get_header()  # Assuming you have a method to retrieve the header
+        self.view.show_results(header, result)
+
+    # def search_button_click(self, phrase):
+    #     self.model.set_phrase(phrase)
+    #     self.model.compare_data()
+    #     self.view.show_results(self.model.get_result())
+        # testin headerit
+        # self.model.read_data()
+        # result, header = self.model.read_data()
+        # header = self.model.get_header()
+        # if header is not None:
+        #     self.view.show_results(results, header)
+        # # self.view.btn_choose_file['state'] = 'normal'
+        # else:
+        #     self.view.show_error('Ei leia päist!')
 
     def set_file_name(self, filename):
         self.model.set_filename(filename)
 
-
-    # def check(self):
-    #     try:
-    #         search_data = self.view.lbl_entry.get()
-    #         self.view.generate_search_results()
-    #     except ValueError as error:
-    #         self.view.show_error(error)
 
 
 
